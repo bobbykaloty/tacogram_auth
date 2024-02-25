@@ -2,7 +2,7 @@
   <% for post in @posts %>
     <div class="col-3">
       <h4>
-        <!-- TODO: display the name of the user that created the post -->
+        <%= User.find_by({ "id" => session["user_id"] })["first_name"] %>
       </h4>
       <img class="img-fluid" src="<%= post["image"] %>" class="w-full">
       <p><%= post["body"] %></p>

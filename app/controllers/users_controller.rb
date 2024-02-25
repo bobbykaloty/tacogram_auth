@@ -5,12 +5,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new
-    @user["first_name"] = params["user"]["first_name"]
-    @user["last_name"] = params["user"]["last_name"]
-    @user["email"] = params["user"]["email"]
+    @user["first_name"] = params["first_name"]
+    @user["last_name"] = params["last_name"]
+    @user["email"] = params["email"]
     # TODO: encrypt user's password "at rest"
-    @user["password"] = params["user"]["password"]
+    @user["password"] = BCrypt::Password.create(params["password"])
     @user.save
+    session["user_id"] = @user["id"]
     redirect_to "/posts"
   end
 end

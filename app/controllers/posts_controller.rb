@@ -10,9 +10,9 @@ class PostsController < ApplicationController
   
     def create
       @post = Post.new
-      @post["body"] = params["post"]["body"]
-      @post["image"] = params["post"]["image"]
-      # TODO: assign logged-in user as user that created the post
+      @post["body"] = params["body"]
+      @post["image"] = params["image"]
+      @post["user_id"] = session["user_id"]
       @post.save
       redirect_to "/posts"
     end
